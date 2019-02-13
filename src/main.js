@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
-
+import '@/assets/css/bace.css'
+import axios from 'axios'
+axios.defaults.baseURL="http://localhost:8888/api/private/v1/"
+Vue.prototype.$http = axios
 
 // vue插件的使用
 Vue.use(ElementUI)
