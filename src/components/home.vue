@@ -18,7 +18,7 @@ export default {};
     height: 100%;
 }
 .aside{
-    background-color: red;
+    background-color: hotpink;
 }
 .main{
     background-color: black;
