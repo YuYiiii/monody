@@ -26,8 +26,9 @@ export default {
   methods: {
     handlelogin() {
       this.$http.post(`login`, this.formdata).then(res => {
-        const { data: { data, meta: { msg, status } } } = res;
+        const { data: { data: { token }, meta: { msg, status } } } = res;
         if (status === 200) {
+          localStorage.setItem('token',token)
           this.$router.push({
             name: "home"
           });
