@@ -29,6 +29,7 @@ export default {
         const { data: { data, meta: { msg, status } } } = res;
         if (status === 200) {
           localStorage.setItem("token", data.token);
+          this.$message.warning("登录成功哟٩(๑>₃<)۶");
           this.$router.push({
             name: "home"
           });
