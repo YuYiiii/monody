@@ -9,10 +9,10 @@
         <!-- 搜索框 -->
         <el-row class="searchBox">
             <el-col>
-                <el-input class="searchInput" placeholder="请输入内容" v-model="query">
-                    <el-button slot="append" icon="el-icon-search"></el-button>
+                <el-input @clear="getAllUsers()" clearable class="searchInput" placeholder="请输入内容" v-model="query">
+                    <el-button @click="searchUser()" slot="append" icon="el-icon-search"></el-button>
                 </el-input>
-                <el-button type="success" plain>添加用户</el-button>
+                <el-button type="success" plain @click="showDiaAddUser()">添加用户</el-button>
             </el-col>
         </el-row>
 
@@ -55,25 +55,85 @@
         </el-table>
 
         <!-- 分页 -->
+        <!-- size-change  每页条数改变时
+            current-change  原来是第一页，点击2页时候触发
+            current-page    当前页码 
+            total  总条数-->
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="pagenum" :page-sizes="[2, 4, 6, 8]" :page-size="2" layout="total, sizes, prev, pager, next, jumper" :total="total">
+        </el-pagination>
+
+        <!-- 对话框组件-------------添加用户对话框 -->
+        <el-dialog title="收货地址" :visible.sync="dialogFormVisibleAdd">
+            <el-form label-position="left" label-width="80px" :model="formdata">
+                <el-form-item label="用户名">
+                    <el-input v-model="formdata.username"></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                    <el-input v-model="formdata.password"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-input v-model="formdata.email"></el-input>
+                </el-form-item>
+                <el-form-item label="电话">
+                    <el-input v-model="formdata.mobile"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
+                <el-button type="primary" @click="dialogFormVisibleAdd = false">确 定</el-button>
+            </div>
+        </el-dialog>
 
     </el-card>
 </template>
-// mg_state: true
-// role_name: "主管"
 <script>
 export default {
   data() {
     return {
       query: "",
       list: [],
-      pagenum: "1",
-      pagesize: "10"
+      pagenum: 1, //请求数据时第几页
+      pagesize: 2, //每页显示几条数据
+      total: -1,
+      dialogFormVisibleAdd: false,
+      //   添加表单数据
+      formdata: {
+          username:'',
+          password:'',
+          email:'',
+          mobile:''
+      }
     };
   },
   created() {
     this.getTableData();
   },
+
+
   methods: {
+    //   展示对话框
+      showDiaAddUser(){
+          this.dialogFormVisibleAdd  = true;
+      },
+    getAllUsers() {
+      this.getTableData();
+    },
+    searchUser() {
+      this.pagenum = 1;
+      this.getTableData();
+    },
+    //   分页相关方法
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pagenum = 1;
+      this.pagesize = val;
+      this.getTableData();
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.pagenum = val;
+      this.getTableData();
+    },
     async getTableData() {
       const AUTH_TOKEN = localStorage.getItem("token");
       this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
@@ -84,6 +144,7 @@ export default {
       );
       const { data, meta: { status, msg } } = res.data;
       if (status === 200) {
+        this.total = data.total;
         this.list = data.users;
       }
     }
