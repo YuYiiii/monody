@@ -203,13 +203,13 @@ export default {
       // id   用户id
       //   点击编辑发送请求获取
       //   点击确定发送请求修改
+
+      // 当点击确定的时候再发送put请求修改数据加载列表
+      // 加载用户列表
       const res = await this.$http.put(
         `users/${this.formdata.id}`,
         this.formdata
       );
-      // 点击编辑按钮-点击的同时根据formdata获取当前对应的用户数据
-      //                                                 |
-      //          得到数据渲染在弹出的框中,
 
       const { meta: { msg, status } } = res.data;
       if (status == 200) {
@@ -218,11 +218,16 @@ export default {
         this.getTableData();
       }
     },
+
     //   编辑-------显示对话框
-    showDiaEditUser(user) {
-      this.formdata = user;
+    async showDiaEditUser(user) {
+      // 点击编辑按钮--发送get请求获取所需用户数据
+      const res = await this.$http.get(`users/${user.id}`);
+
+      //          得到数据渲染在弹出的框中
+      this.formdata = res.data.data;
+
       this.dialogFormVisibleEdit = true;
-      //   this.$http.get()
     },
     showMsgBox(user) {
       this.$confirm("是否确认删除该用户(￣▽￣)／", "提示", {

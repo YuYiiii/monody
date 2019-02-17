@@ -5,7 +5,7 @@
         <el-button class="btn" type="primary" plain>添加角色</el-button>
         <!-- 表格 -->
         <el-table 
-        height="700px"
+        height="500px"
          :data="list" style="width: 100%">
             <el-table-column type="index" label="#" width="160">
             </el-table-column>
@@ -38,7 +38,7 @@ export default {
   methods: {
     async getTableData() {
       const res = await this.$http.get(`rights/list`);
-      console.log(res);
+    //   console.log(res);
       const {meta:{msg,status},data} = res.data
       if(status===200){
           this.list = data

@@ -11,25 +11,25 @@ HttpServer.install = function (Vue) {
 
   // 当请求时登录时,直接发送请求
   // 当请求不是登录时,先加头部,然后继续发送请求
-  
-  
+
+
   // 请求拦截器
   //  headers请求头
   //  URL  请求的标识路径
   axios.interceptors.request.use(function (config) {
     // console.log('拦截器被触发');
-    if(config.url!=='login'){
-      
+    if (config.url !== 'login') {
       const AUTH_TOKEN = localStorage.getItem("token");
-      axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+      // this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+      config.headers["Authorization"] = AUTH_TOKEN;
     }
     return config;
   }, function (error) {
     // 请求错误之后的处理
-        return Promise.reject(error);
+    return Promise.reject(error);
   });
 
-  
+
 
   Vue.prototype.$http = axios
 }
