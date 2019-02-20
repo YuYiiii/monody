@@ -61,7 +61,7 @@ export default {
       const { meta: { msg, status }, data } = res.data;
       if (status === 200) {
         this.menus = data;
-        console.log(res);
+        // console.log(res);
       }
     },
     handleLoginout() {
