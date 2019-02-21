@@ -29,7 +29,13 @@
             <el-input v-model="form.goods_number"></el-input>
           </el-form-item>
           <el-form-item label="商品分类">
-            <el-cascader clearable="" expand-trigger="hover" :options="options" v-model="selectedOptions" @change="handleChange" :props="defaultProp">
+            <el-cascader
+             clearable
+              expand-trigger="hover"
+               :options="options" 
+               v-model="selectedOptions"
+                @change="handleChange" 
+                :props="defaultProp">
             </el-cascader>
           </el-form-item>
         </el-tab-pane>

@@ -7,6 +7,8 @@ import Rights from '@/components/rights.vue'
 import Roles from '@/components/roles.vue'
 import Goodlist from '@/components/goodslist.vue'
 import Goodsadd from '@/components/goodsadd.vue'
+import Cateparams from '@/components/cateparams.vue'
+import Goodscate from '@/components/goodscate.vue'
 
 
 
@@ -37,6 +39,16 @@ export default new Router({
         name: "goodsadd",
         path: '/goodsadd',
         component: Goodsadd
+      },
+      {
+        name: "params",
+        path: '/params',
+        component: Cateparams
+      },
+      {
+        name: 'categories',
+        path: '/categories',
+        component: Goodscate
       }]
     },
     {
