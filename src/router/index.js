@@ -10,6 +10,9 @@ import Goodsadd from '@/components/goodsadd.vue'
 import Cateparams from '@/components/cateparams.vue'
 import Goodscate from '@/components/goodscate.vue'
 
+import Order from '@/components/order.vue'
+import Reports from '@/components/reports.vue'
+
 
 
 Vue.use(Router)
@@ -20,36 +23,47 @@ export default new Router({
       path: '/',
       component: Home,
       children: [{
-        name: "users",
-        path: '/users',
-        component: Users
-      }, {
-        name: "rights",
-        path: '/rights',
-        component: Rights
-      }, {
-        name: "roles",
-        path: '/roles',
-        component: Roles
-      }, {
-        name: "goods",
-        path: '/goods',
-        component: Goodlist
-      }, {
-        name: "goodsadd",
-        path: '/goodsadd',
-        component: Goodsadd
-      },
-      {
-        name: "params",
-        path: '/params',
-        component: Cateparams
-      },
-      {
-        name: 'categories',
-        path: '/categories',
-        component: Goodscate
-      }]
+          name: "users",
+          path: '/users',
+          component: Users
+        }, {
+          name: "rights",
+          path: '/rights',
+          component: Rights
+        }, {
+          name: "roles",
+          path: '/roles',
+          component: Roles
+        }, {
+          name: "goods",
+          path: '/goods',
+          component: Goodlist
+        }, {
+          name: "goodsadd",
+          path: '/goodsadd',
+          component: Goodsadd
+        },
+        {
+          name: "params",
+          path: '/params',
+          component: Cateparams
+        },
+        {
+          name: 'categories',
+          path: '/categories',
+          component: Goodscate
+        },
+        {
+          name: 'orders',
+          path: '/orders',
+          component: Order
+        },
+        {
+          name: 'reports',
+          path: '/reports',
+          component: Reports
+        }
+      ]
     },
     {
       name: "login",
