@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MyEcharts from "echarts";
+import echarts from "echarts";
 export default {
   data() {
     return {};
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     async initEcharts() {
-      const myChart = MyEcharts.init(document.getElementById("main"));
+      const myChart = echarts.init(document.getElementById("main"));
       // 指定图表的配置项和数据
       // 请求数据
       // 1. reports/1

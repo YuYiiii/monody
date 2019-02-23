@@ -306,7 +306,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .searchBox {
   margin-top: 20px;
 }

@@ -6,7 +6,7 @@
     </el-breadcrumb>
 </template>
 
-<script>
+<script scoped>
 export default {
     name:'cusBread',
     data(){

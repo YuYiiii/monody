@@ -4,7 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -15,12 +15,22 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  externals: {
+    // key->包名字->去package中找
+    // value->该包的源码中暴露给全局的变量名
+    "vue": "Vue",
+    "vue-router": "VueRouter",
+    "element-ui": "ELEMENT",
+    "moment": "moment",
+    "axios": "axios",
+    "echarts": "echarts"
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath: process.env.NODE_ENV === 'production' ?
+      config.build.assetsPublicPath :
+      config.dev.assetsPublicPath
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -30,8 +40,7 @@ module.exports = {
     }
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
